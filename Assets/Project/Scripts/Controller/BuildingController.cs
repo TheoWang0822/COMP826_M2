@@ -5,6 +5,8 @@ public class BuildingController : MonoBehaviour
 {
     [SerializeField]
     List<Floor> floorList = new();
+    [SerializeField]
+    private FireDataSO fireData;
 
     int current = -1;
     void OnEnable()
@@ -21,7 +23,7 @@ public class BuildingController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        GoBackOverview();
     }
 
     // Update is called once per frame
@@ -40,11 +42,15 @@ public class BuildingController : MonoBehaviour
             return;
         }
         current = id;
+        int count = 1;
         foreach (var value in floorList)
         {
-            value.gameObject.transform.Find("Roof1")?.gameObject.SetActive(value.id > current);
-            value.gameObject.transform.Find("Roof2")?.gameObject.SetActive(value.id > current);
-            value.gameObject.SetActive(value.id <= current);
+            value.SetVisible(value.id <= current);
+            if (count == current)
+            {
+                value.SetHighlight();
+            }
+            count++;
         }
 
 
@@ -53,11 +59,13 @@ public class BuildingController : MonoBehaviour
     private void GoBackOverview()
     {
         current = -1;
+        int count = 0;
         foreach (var value in floorList)
         {
-            value.gameObject.SetActive(true);
-            value.gameObject.transform.Find("Roof1")?.gameObject.SetActive(true);
-            value.gameObject.transform.Find("Roof2")?.gameObject.SetActive(true);
+            value.SetVisible();
+            value.SetHighlight(fireData.isOnFire[count]);
+            /*fireData.isOnFire[count];*/
+            count++;
         }
     }
 
