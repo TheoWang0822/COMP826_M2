@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CursorController : MonoBehaviour
 {
@@ -8,8 +9,21 @@ public class CursorController : MonoBehaviour
 
     void Update()
     {
+        /*if (Input.GetMouseButtonDown(0))
+            TryPick(Input.mousePosition);*/
+
+
         if (Input.GetMouseButtonDown(0))
+        {
+            
+            // if raycast hit UI, return
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+            // otherwise 3D Raycast floor logic
             TryPick(Input.mousePosition);
+        }
     }
 
     void TryPick(Vector2 screenPos)
