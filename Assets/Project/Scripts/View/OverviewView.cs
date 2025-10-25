@@ -4,10 +4,9 @@ using UnityEngine.UI;
 public class OverviewView : MonoBehaviour
 {
     public Button sideBtn;
-    private SideMenuView sideMenu;
+    public SideMenuView sideMenu;
     void Start()
     {
-        sideMenu = FindObjectOfType<SideMenuView>();
         if (sideBtn != null)
         {
             sideBtn.onClick.AddListener(OnHamburgerClick);
@@ -23,7 +22,8 @@ public class OverviewView : MonoBehaviour
     {
         if (sideMenu != null)
         {
-            sideMenu.ToggleMenu(); // 调用打开/关闭侧菜单
+            sideMenu.ToggleMenu();
+            UIController.Instance.ShowPanel(UIController.Instance.sideMenuPanel);
         }
         else
         {

@@ -4,22 +4,53 @@ using UnityEngine.UI;
 
 public class SideMenuView : MonoBehaviour
 {
-    public RectTransform sideMenuRect; // 拖拽SideMenuPanel的RectTransform
+    public Button SearchBtn;
+    public Button fighterListBtn;
+    public Button taskListBtn;
+
+
+    public RectTransform sideMenuRect;
     public Button ExitBtn;
-    public float slideDuration = 0.3f; // 动画时长
-    private float menuWidth= 800f; // 菜单宽度
+    public float slideDuration = 0.3f;
+    private float menuWidth= 800f; //
     private bool isOpen = false;
-    //private GameObject isSliding = false;
 
-    void Start()
+    void OnEnable()
     {
-        sideMenuRect.anchoredPosition = new Vector2(-menuWidth, 0); // 初始隐藏在左侧
+        isOpen = false;
+        sideMenuRect.anchoredPosition = new Vector2(-menuWidth, 0);
         ExitBtn.onClick.AddListener(CloseMenu);
-    }
 
-    // ToggleMenu函数：切换菜单状态（核心逻辑）
+        if (fighterListBtn != null)
+        {
+            fighterListBtn.onClick.AddListener(OnFighterListClick);
+        }
+        else
+        {
+            Debug.LogError("fighterListBtn unassigned！");
+        }
+
+        if (SearchBtn != null)
+        {
+            SearchBtn.onClick.AddListener(OnSearchClick);
+        }
+        else
+        {
+            Debug.LogError("SearchBtn unassigned！");
+        }
+
+        if (taskListBtn != null)
+        {
+            taskListBtn.onClick.AddListener(OnTasksClick);
+        }
+        else
+        {
+            Debug.LogError("taskListBtn unassigned！");
+        }
+    }
     public void ToggleMenu()
     {
+        Debug.Log("overhere2 " + isOpen);
         if (isOpen)
         {
             CloseMenu();
@@ -30,19 +61,35 @@ public class SideMenuView : MonoBehaviour
         }
     }
 
-    // 打开菜单的辅助函数
     private void OpenMenu()
     {
         sideMenuRect.DOAnchorPosX(0, slideDuration).SetEase(Ease.OutCubic); // 从左滑入
         isOpen = true;
         ExitBtn.gameObject.SetActive(true);
     }
-
-    // 关闭菜单的辅助函数
     private void CloseMenu()
     {
-        sideMenuRect.DOAnchorPosX(-menuWidth, slideDuration).SetEase(Ease.InCubic); // 向左滑出
-        isOpen = false;
-        ExitBtn.gameObject.SetActive(false);
+        sideMenuRect.DOAnchorPosX(-menuWidth, slideDuration).SetEase(Ease.InCubic).OnComplete(() => {
+            isOpen = false;
+            ExitBtn.gameObject.SetActive(false);
+            UIController.Instance.Back();
+        });
+    }
+
+    private void OnSearchClick()
+    {
+        UIController.Instance.ClearStack();
+        //sideMenuRect.anchoredPosition = new Vector2(-menuWidth, 0);
+    }
+
+    private void OnFighterListClick()
+    {
+        UIController.Instance.ShowPanel(UIController.Instance.FireFighterListMenuPanel);
+        //sideMenuRect.anchoredPosition = new Vector2(-menuWidth, 0);
+    }
+
+    private void OnTasksClick()
+    {
+        UIController.Instance.ShowPanel(UIController.Instance.TaskListMenuPanel);
     }
 }

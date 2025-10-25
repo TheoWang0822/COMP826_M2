@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 658a0c015d621484cbbf9900b83c40d2, type: 3}
   m_Name: FireData
   m_EditorClassIdentifier: Assembly-CSharp::FireDataSO
-  isOnFire: 0000010001
+  isOnFire: 0001000100
