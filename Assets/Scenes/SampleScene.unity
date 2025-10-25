@@ -6583,6 +6583,7 @@ MonoBehaviour:
   - {fileID: 1933250892}
   - {fileID: 1952299276}
   fireData: {fileID: 11400000, guid: d29c9d7bbd2128d4fac219506a83515e, type: 2}
+  fighterData: {fileID: 11400000, guid: 5860bb9c4b5838f46919feeb0e475d98, type: 2}
 --- !u!4 &966976616
 Transform:
   m_ObjectHideFlags: 0

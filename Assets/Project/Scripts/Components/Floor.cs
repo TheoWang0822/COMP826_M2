@@ -6,6 +6,10 @@ public class Floor : MonoBehaviour
     public FloorType isCeiling = FloorType.Floor;
     private bool isVisible = true;
     private bool isOnFire = false;
+    public GameObject C1;
+    public GameObject C2;
+    public GameObject C3;
+    public GameObject C4;
     void Awake()
     {
 
@@ -13,7 +17,13 @@ public class Floor : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        /*for (int i = 0; i < 2; i++) 
+        {
+            for (int j = 0; i < 2; j++)
+            {
+
+            }
+        }*/
     }
 
     // Update is called once per frame
@@ -46,6 +56,29 @@ public class Floor : MonoBehaviour
     {
         transform.Find("Highlight")?.gameObject.SetActive(false);
         transform.GetChild(0).Find("Highlight")?.gameObject.SetActive(false);
+    }
+
+    public void setFirefighterHL(int x, int y)
+    {
+        if (x == 1 && y == 1)
+        {
+            C1.SetActive(true);
+        }
+
+        if (x == 1 && y == 2)
+        {
+            C2.SetActive(true);
+        }
+
+        if (x == 2 && y == 1)
+        {
+            C3.SetActive(true);
+        }
+
+        if (x == 2 && y == 2)
+        {
+            C4.SetActive(true);
+        }
     }
 
 

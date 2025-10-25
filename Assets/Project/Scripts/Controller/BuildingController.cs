@@ -7,6 +7,8 @@ public class BuildingController : MonoBehaviour
     List<Floor> floorList = new();
     [SerializeField]
     private FireDataSO fireData;
+    [SerializeField]
+    private FireFighterListSO fighterData;
 
     int current = -1;
     void OnEnable()
@@ -24,6 +26,7 @@ public class BuildingController : MonoBehaviour
     void Start()
     {
         GoBackOverview();
+        FighterHighlight();
     }
 
     // Update is called once per frame
@@ -52,8 +55,6 @@ public class BuildingController : MonoBehaviour
             }
             count++;
         }
-
-
     }
 
     private void GoBackOverview()
@@ -69,5 +70,18 @@ public class BuildingController : MonoBehaviour
         }
     }
 
+    public void FighterHighlight()
+    {
+        foreach (var firefighter in fighterData.firefighters)
+        {
+            int floorNumber = (int)firefighter.location.z;
+
+            if (floorNumber >= 1 && floorNumber <= floorList.Count)
+            {
+                Floor targetFloor = floorList[floorNumber - 1];
+                targetFloor.setFirefighterHL((int)firefighter.location.x, (int)firefighter.location.y);
+            }
+        }
+    }
 
 }

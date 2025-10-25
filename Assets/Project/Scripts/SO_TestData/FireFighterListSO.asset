@@ -16,20 +16,20 @@ MonoBehaviour:
   - id: 11
     name: James
     status: Available
-    location: {x: 0, y: 0, z: 0}
+    location: {x: 1, y: 1, z: 1}
     task: 
   - id: 22
     name: Theo
     status: Busy
-    location: {x: 0, y: 0, z: 0}
+    location: {x: 2, y: 1, z: 1}
     task: 
   - id: 33
     name: Carter
     status: Busy
-    location: {x: 0, y: 0, z: 0}
+    location: {x: 1, y: 1, z: 2}
     task: 
   - id: 44
     name: Ya
     status: Busy
-    location: {x: 0, y: 0, z: 0}
+    location: {x: 1, y: 2, z: 3}
     task: 
